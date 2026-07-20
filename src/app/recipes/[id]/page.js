@@ -29,50 +29,45 @@ export default async function RecipePage({params}){
     
 
     return(
-        <div className="min-h-screen flex w-full gap-4 flex-col items-start">
-            <Container>
-            <h1 className="text-4xl text-center w-full font-bold">Recipe details</h1>
-                <div className="flex flex-col">
-                    <div className="flex justify-end">
-                    <RecipeActions isOwner={isOwner} id={id} />
-                    </div>
-        {<img src={recipe&& recipe.image} className="w-full h-96 object-cover"/>}
+      <div className="min-h-screen w-full">
+    <Container>
+        {/* Hero Image */}
+        <div className="relative w-full h-64 md:h-96 rounded-2xl overflow-hidden mb-6">
+            <img src={recipe?.image} className="w-full h-full object-cover" alt={recipe?.title} />
+            <div className="absolute top-4 right-4">
+                <RecipeActions isOwner={isOwner} id={id} />
+            </div>
         </div>
-        <div className="flex flex-col w-full items-start gap-2">
-            <div className="flex flex-row w-full items-center justify-between">
-            <h1 className="text-3xl font-semibold capitalize">{recipe&& recipe.title}</h1>
-            <div className="flex flex-col items-center ">
-                <h2 className="text-blue-300 text-2xl">Cooking Time</h2>
-                <h2 className="  text-gray-400">{recipe&& recipe.cookTime}</h2>
-            </div>
 
+        {/* Title + Cook Time */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <h1 className="text-2xl md:text-4xl font-bold capitalize">{recipe?.title}</h1>
+            <div className="flex items-center gap-2 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm">
+                ⏱ {recipe?.cookTime}
             </div>
-            <div>
-            <h2 className="text-2xl">Description</h2>
-            <p className="text-sm">{recipe&& recipe.description}</p>
-            <div className="flex flex-col justify-between w-full">
-            <div className="flex flex-col items-start">
-            <h2 className="text-2xl">Ingredients</h2>
-                <ol className="">
-                    
-                    { recipe.ingredients? recipe.ingredients.map((ing, index) => {
-                       return (<li className="text-sm" key={index}>
-                       {index}. {ing.name}
-                       </li>)
-                    }): []}
+        </div>
+
+        {/* Description */}
+        <p className=" text-sm md:text-base mb-8">{recipe?.description}</p>
+
+        {/* Ingredients + Instructions */}
+        <div className="flex flex-col md:flex-row gap-8">
+            <div className="md:w-1/3">
+                <h2 className="text-xl font-semibold mb-3">Ingredients</h2>
+                <ol className="flex flex-col gap-2">
+                    {recipe?.ingredients?.map((ing, index) => (
+                        <li key={index} className="text-sm  border border-gray-200 rounded-lg px-3 py-2">
+                            {index + 1}. {ing.name}
+                        </li>
+                    ))}
                 </ol>
             </div>
-            <div className=" flex flex-col">
-            <h2 className="text-2xl ">Instructions</h2>
-            <p className="text-sm">{recipe.instructions}</p>
+            <div className="md:w-2/3">
+                <h2 className="text-xl font-semibold mb-3">Instructions</h2>
+                <p className="text-sm md:text-base leading-relaxed">{recipe?.instructions}</p>
             </div>
-            </div>
-
-            </div>
-
-
         </div>
-        </Container>
-        </div>
+    </Container>
+</div>
     )
 }
