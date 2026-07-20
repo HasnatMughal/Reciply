@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken"
 import RecipeList from "@/components/RecipeList";
 import Link from "next/link";
+import LogoutBtn from "@/components/LogoutBtn";
 
 
 export default async function Dashboard(){
@@ -27,11 +28,16 @@ export default async function Dashboard(){
     const recipesCount = recipes.length
     console.log(recipesCount);
     
+    
 
     return(
         <div>
             <Container>
-                <h1 className="text-3xl font-bold capitalize">Hi, {userName}. Welcome to your dashboard</h1>
+                <div className="flex flex-row justify-between">
+<h1 className="text-3xl font-bold capitalize">Hi, {userName}. Welcome to your dashboard</h1>
+<LogoutBtn />
+                </div>
+                
                     <div className="flex flex-col min-h-screen gap-5">
                         <div className="grid grid-cols-3 ">
                             <div className="w-48 mt-5 mb-5 bg-red-400 h-48 rounded-2xl border border-gray-50 flex flex-col items-center justify-center">

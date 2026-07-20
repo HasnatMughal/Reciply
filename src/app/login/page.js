@@ -16,7 +16,8 @@ export default function Login(){
             })
             if(res.ok){
                 console.log("Login success")
-                router.push("/dashboard")
+                router.push("/")
+                router.refresh()
 
             }
         } catch (error) {
@@ -27,17 +28,40 @@ export default function Login(){
 
 return(
  
-         <div className="w-full max-w-lg mx-auto border flex flex-col items-center gap-4 min-h-screen justify-center border-gray-100">
-            <h1 className="text-center font-semibold text-3xl">Login</h1>
-<form className=" flex flex-col gap-4 items-center" onSubmit={(e) => {e.preventDefault()
-    handleSubmit()
-}}>
-   
-    <input value={email} onChange={(e) => setEmail(e.target.value)} className="w-full min-w-64 border border-gray-200 px-2 py-3 focus:border-gray-300"/>
-    <input value={password} type="password" onChange={(e) => setPassword(e.target.value)} className="w-full min-w-64 border border-gray-200 px-2 py-3 focus:border-gray-300"/>
-        <button className="bg-blue-400 hover:bg-blue-500 text-white p-2 w-64" type="submit">Login</button>
-</form>
-
+        <div className="min-h-screen flex items-center justify-center">
+    <div className="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-gray-100 p-8 flex flex-col gap-6">
+        <div className="text-center">
+            <h1 className="text-3xl font-bold text-black">Welcome Back</h1>
+            <p className="text-gray-400 text-sm mt-1">Login to your Reciply account</p>
+        </div>
+        <form className="flex flex-col gap-4" onSubmit={(e) => { e.preventDefault(); handleSubmit() }}>
+            <div className="flex flex-col gap-1">
+                <label className="text-sm text-gray-600">Email</label>
+                <input 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    placeholder="you@example.com"
+                    className="w-full border border-gray-200 px-4 py-3 rounded-xl focus:outline-none focus:border-gray-400"
+                />
+            </div>
+            <div className="flex flex-col gap-1">
+                <label className="text-sm text-gray-600">Password</label>
+                <input 
+                    value={password} 
+                    type="password" 
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full border border-gray-200 px-4 py-3 rounded-xl focus:outline-none focus:border-gray-400"
+                />
+            </div>
+            <button className="bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-xl font-medium mt-2" type="submit">
+                Login
+            </button>
+        </form>
+        <p className="text-center text-sm text-gray-400">
+            Don't have an account? <a href="/signup" className="text-amber-600 hover:underline">Sign up</a>
+        </p>
     </div>
+</div>
 )
 }

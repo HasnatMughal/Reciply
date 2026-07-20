@@ -1,11 +1,18 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { BiMenu } from 'react-icons/bi'
 
 
-function Navbar({}) {
+
+function Navbar({isLoggedIn}) {
+
+  useEffect(() => {
+    isLoggedIn
+  },[isLoggedIn])
+  
+
   const router = useRouter()
   const [viewHam, setViewHam] = useState(false)
   const [searchVal, setSearchVal] = useState('')
@@ -19,7 +26,13 @@ function Navbar({}) {
         <div className='flex hidden md:flex-row md:block md:flex items-center gap-8'>
         <li className='hover:border-b'><Link href={`/`}>Homepage</Link></li>
         <li className='hover:border-b'><Link href={`/recipes`}>Recipes</Link></li>
-        <li className='hover:border-b'><Link href={`/dashboard`}>Dashboard</Link></li>
+        {
+          !isLoggedIn ? <div className="flex gap-2 items-center">
+            <Link href={"/login"}>Login</Link>
+            <Link className=' hover:bg-white hover:text-amber-900 px-4 py-2 border' href={"/signup"}>Register</Link>
+          </div> : <li className='hover:border-b'><Link href={`/dashboard`}>Dashboard</Link></li> 
+        }
+        
         </div>
         <div className='relative flex items-center'>
           <button onClick={() => setViewHam(!viewHam)} className='block md:hidden'><BiMenu  className='text-2xl'/></button>
